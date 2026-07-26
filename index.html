@@ -7,7 +7,6 @@
   <title>AIZZA Snack Distributor</title>
 
   <link rel="stylesheet" href="style.css">
-
   <link rel="manifest" href="manifest.json">
 </head>
 
@@ -18,49 +17,48 @@
   <p>SNACK DISTRIBUTOR</p>
 </header>
 
-
 <main>
 
 <section class="dashboard">
 
-  <div class="card">
-    <span>📦</span>
-    <h3>Produk Jadi</h3>
-    <p id="stokJadi">0 bungkus</p>
-  </div>
+<div class="card">
+<span>📦</span>
+<h3>Produk Jadi</h3>
+<p id="stokJadi">0 bungkus</p>
+</div>
 
+<div class="card">
+<span>📦</span>
+<h3>Stok Bal</h3>
+<p id="stokBal">0 bal</p>
+</div>
 
-  <div class="card">
-    <span>📦</span>
-    <h3>Stok Bal</h3>
-    <p id="stokBal">0 bal</p>
-  </div>
+<div class="card">
+<span>🏭</span>
+<h3>Packing</h3>
+<p id="packing">0 proses</p>
+</div>
 
+<div class="card">
+<span>🏪</span>
+<h3>Di Toko</h3>
+<p id="diToko">0 bungkus</p>
+</div>
 
-  <div class="card">
-    <span>🏭</span>
-    <h3>Packing</h3>
-    <p id="packing">0 proses</p>
-  </div>
-
-
-  <div class="card">
-    <span>🏪</span>
-    <h3>Di Toko</h3>
-    <p id="diToko">0 bungkus</p>
-  </div>
-
-
-  <div class="card">
-    <span>💰</span>
-    <h3>Kas</h3>
-    <p id="kas">Rp 0</p>
-  </div>
+<div class="card">
+<span>💰</span>
+<h3>Kas</h3>
+<p id="kas">Rp 0</p>
+</div>
 
 </section>
 
-
 <section class="menu">
+
+<button onclick="bukaProduk()">
+📦<br>
+Master Produk
+</button>
 
 <button>
 🛒<br>
@@ -94,15 +92,27 @@ Pengaturan
 
 </section>
 
-</main>
+<div id="konten"></div>
 
+</main>
 
 <footer>
 <p>AIZZA Snack Distributor © 2026</p>
 </footer>
 
-
 <script src="app.js"></script>
+<script src="produk.js"></script>
+
+<script>
+function bukaProduk(){
+    fetch("produk.html")
+    .then(res => res.text())
+    .then(data => {
+        document.getElementById("konten").innerHTML = data;
+        tampilProduk();
+    });
+}
+</script>
 
 </body>
 </html>
