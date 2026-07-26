@@ -2,17 +2,43 @@
 
 <h2>📦 Master Produk</h2>
 
-<button onclick="tambahProduk()">
-➕ Tambah Produk
+<div class="form-produk">
+
+<input id="kode" placeholder="Kode Produk">
+
+<input id="nama" placeholder="Nama Produk">
+
+<input id="kategori" placeholder="Kategori">
+
+<input id="berat" type="number" placeholder="Berat Bal (kg)">
+
+<input id="modal" type="number" placeholder="Harga Modal Bal">
+
+<input id="hargaToko" type="number" placeholder="Harga ke Toko">
+
+<input id="hargaJual" type="number" placeholder="Harga Jual">
+
+<textarea id="catatan" placeholder="Catatan"></textarea>
+
+<button onclick="simpanProduk()">
+💾 Simpan
 </button>
 
+</div>
+
+
+<hr>
+
+
+<h3>Daftar Produk</h3>
+
 <input 
-type="text" 
 id="cariProduk"
-placeholder="🔍 Cari produk..."
+placeholder="🔍 Cari..."
 onkeyup="cariProduk()">
 
 
 <div id="daftarProduk"></div>
+
 
 </section>
