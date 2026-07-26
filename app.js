@@ -40,22 +40,6 @@ tampilkanDashboard();
 
 // Tombol menu sementara
 
-let tombol = document.querySelectorAll(".menu button");
-
-
-tombol.forEach(function(btn){
-
-    btn.addEventListener("click", function(){
-
-        alert(
-          "Menu " + 
-          this.innerText.replace(/\n/g," ") +
-          " sedang disiapkan"
-        );
-
-    });
-
-});
 
 // Aktifkan PWA Service Worker
 
