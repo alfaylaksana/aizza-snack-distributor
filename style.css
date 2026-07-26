@@ -1,0 +1,126 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f8f5ef;
+  color: #333;
+}
+
+
+/* HEADER */
+
+.header {
+  background: #c96b24;
+  color: white;
+  text-align: center;
+  padding: 25px 10px;
+  border-radius: 0 0 25px 25px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 32px;
+  letter-spacing: 2px;
+}
+
+.header p {
+  margin: 5px 0 0;
+  font-size: 16px;
+}
+
+
+/* DASHBOARD */
+
+.dashboard {
+  padding: 15px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+}
+
+
+.card span {
+  font-size: 30px;
+}
+
+
+.card h3 {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+
+.card p {
+  margin: 0;
+  font-weight: bold;
+  color: #c96b24;
+}
+
+
+/* MENU */
+
+.menu {
+  padding: 15px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+
+.menu button {
+
+  border: none;
+  background: white;
+  border-radius: 18px;
+
+  padding: 18px 5px;
+
+  font-size: 14px;
+  font-weight: bold;
+
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+
+  cursor: pointer;
+}
+
+
+.menu button:hover {
+  background: #fff0df;
+}
+
+
+/* FOOTER */
+
+footer {
+  text-align: center;
+  font-size: 12px;
+  padding: 20px;
+  color: #777;
+}
+
+
+/* UNTUK HP KECIL */
+
+@media(max-width:450px){
+
+.dashboard {
+  grid-template-columns: 1fr;
+}
+
+.menu {
+  grid-template-columns: repeat(2,1fr);
+}
+
+}
