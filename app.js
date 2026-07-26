@@ -56,3 +56,16 @@ tombol.forEach(function(btn){
     });
 
 });
+
+// Aktifkan PWA Service Worker
+
+if ("serviceWorker" in navigator){
+
+  navigator.serviceWorker.register("service-worker.js")
+  .then(function(){
+
+    console.log("AIZZA PWA siap digunakan");
+
+  });
+
+}
