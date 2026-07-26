@@ -134,15 +134,32 @@ alert("Kode dan nama produk wajib diisi");
 return;
 
 }
-
-
 produk.push(data);
-
 
 tampilProduk();
 
-
 alert("Produk berhasil ditambahkan");
 
+}
+
+
+// fungsi edit mulai di bawah sini
+
+function editProduk(index){
+
+    let p = produk[index];
+
+    document.getElementById("kode").value = p.kode;
+    document.getElementById("nama").value = p.nama;
+    document.getElementById("kategori").value = p.kategori || "";
+    document.getElementById("berat").value = p.berat;
+    document.getElementById("modal").value = p.modal || "";
+    document.getElementById("hargaToko").value = p.hargaToko;
+    document.getElementById("hargaJual").value = p.hargaJual;
+    document.getElementById("catatan").value = p.catatan || "";
+
+    produk.splice(index,1);
+
+    alert("Data siap diedit. Silakan tekan Simpan.");
 
 }
