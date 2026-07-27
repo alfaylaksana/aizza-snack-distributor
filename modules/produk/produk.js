@@ -1,3 +1,4 @@
+alert("produk.js berjalan");
 import { db } from "../../firebase.js";
 
 import {
