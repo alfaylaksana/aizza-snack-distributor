@@ -109,7 +109,11 @@ footer {
   padding: 20px;
   color: #777;
 }
-
+#daftarProduk {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
 
 /* UNTUK HP KECIL */
 
@@ -118,7 +122,9 @@ footer {
 .dashboard {
   grid-template-columns: 1fr;
 }
-
+#daftarProduk {
+  grid-template-columns: repeat(2, 1fr);
+}
 .menu {
   grid-template-columns: repeat(2,1fr);
 }
