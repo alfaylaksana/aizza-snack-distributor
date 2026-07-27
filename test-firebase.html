@@ -3,17 +3,15 @@
 <body>
 
 <h2>Tes Firebase AIZZAY</h2>
-<div id="hasil">Mulai...</div>
+<div id="hasil">Memuat...</div>
 
 <script type="module">
-const hasil = document.getElementById("hasil");
+import { initializeApp } 
+from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
 
-try {
-  const modul = await import("./modules/firebase.js");
-  hasil.innerHTML = "firebase.js TERBACA";
-} catch (error) {
-  hasil.innerHTML = "ERROR: " + error.message;
-}
+document.getElementById("hasil").innerHTML =
+"Firebase App berhasil dimuat";
+
 </script>
 
 </body>
