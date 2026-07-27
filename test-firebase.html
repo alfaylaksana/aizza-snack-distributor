@@ -6,11 +6,38 @@
 <div id="hasil">Memuat...</div>
 
 <script type="module">
-import { initializeApp } 
-from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
 
-document.getElementById("hasil").innerHTML =
-"Firebase App berhasil dimuat";
+import { db } from "./modules/firebase.js";
+
+import { 
+  collection, 
+  getDocs 
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+
+const hasil = document.getElementById("hasil");
+
+try {
+
+  const snapshot = await getDocs(collection(db, "users"));
+
+  let teks = "";
+
+  snapshot.forEach((doc) => {
+    teks += `
+      ID: ${doc.id}<br>
+      Nama: ${doc.data().nama}<br>
+      Role: ${doc.data().role}<br><br>
+    `;
+  });
+
+  hasil.innerHTML = teks;
+
+} catch(error) {
+
+  hasil.innerHTML = "ERROR: " + error.message;
+
+}
 
 </script>
 
