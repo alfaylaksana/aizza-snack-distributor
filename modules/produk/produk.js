@@ -200,12 +200,16 @@ function nonaktifProduk(index){
 
 produk[index].status="nonaktif";
 
-
 simpanStorage();
 
 tampilProduk();
 
-
 alert("Produk dinonaktifkan");
 
+}
+
+
+setTimeout(function(){
+    tampilProduk();
+},100);
 }
