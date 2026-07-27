@@ -1,10 +1,10 @@
 import { db } from "../../firebase.js";
-import { 
-  collection,
-  getDocs,
-  addDoc
-} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
+import {
+  collection,
+  getDocs
+} from 
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 let produk = JSON.parse(localStorage.getItem("produkAizzay")) || [
 {
@@ -236,5 +236,20 @@ function nonaktifProduk(index){
 }
 
 
-// di luar fungsi
+async function ambilProdukFirebase(){
+
+    console.log("Mulai membaca Firestore...");
+
+    const data = await getDocs(
+        collection(db,"produk")
+    );
+
+    console.log("Jumlah data:", data.size);
+
+    data.forEach((doc)=>{
+        console.log(doc.id, doc.data());
+    });
+
+}
+
 ambilProdukFirebase();
