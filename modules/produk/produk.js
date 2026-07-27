@@ -198,18 +198,16 @@ alert("Data siap diedit. Silakan tekan Simpan.");
 
 function nonaktifProduk(index){
 
-produk[index].status="nonaktif";
+    produk[index].status="nonaktif";
 
-simpanStorage();
+    simpanStorage();
 
-tampilProduk();
-
-alert("Produk dinonaktifkan");
-
-}
-
-
-setTimeout(function(){
     tampilProduk();
-},100);
+
+    alert("Produk dinonaktifkan");
+
 }
+
+
+// di luar fungsi
+tampilProduk();
