@@ -3,15 +3,17 @@
 <body>
 
 <h2>Tes Firebase AIZZAY</h2>
-<div id="hasil">Memuat...</div>
+<div id="hasil">Mulai...</div>
 
 <script type="module">
-import { db } from "./modules/firebase.js";
-
 const hasil = document.getElementById("hasil");
 
-hasil.innerHTML = "Firebase berhasil terhubung";
-
+try {
+  const modul = await import("./modules/firebase.js");
+  hasil.innerHTML = "firebase.js TERBACA";
+} catch (error) {
+  hasil.innerHTML = "ERROR: " + error.message;
+}
 </script>
 
 </body>
