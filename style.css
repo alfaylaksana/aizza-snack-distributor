@@ -104,11 +104,9 @@ body {
   padding-left: 3mm;
   padding-right: 3mm;
 }
-.form-produk input,
-.form-produk textarea {
-  height: 38px;
-  padding: 5px;
-  box-sizing: border-box;
+.produk-page {
+  padding-left: 15px;
+  padding-right: 15px;
 }
 /* FOOTER */
 
