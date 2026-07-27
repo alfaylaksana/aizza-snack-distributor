@@ -1,3 +1,11 @@
+import { db } from "../../firebase.js";
+import { 
+  collection,
+  getDocs,
+  addDoc
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+
 let produk = JSON.parse(localStorage.getItem("produkAizzay")) || [
 {
 kode:"MDJ",
@@ -32,7 +40,26 @@ function simpanStorage(){
         JSON.stringify(produk)
     );
 }
+async function ambilProdukFirebase(){
 
+const snapshot = await getDocs(
+    collection(db,"produk")
+);
+
+produk = [];
+
+snapshot.forEach((doc)=>{
+
+produk.push({
+    id: doc.id,
+    ...doc.data()
+});
+
+});
+
+tampilProduk();
+
+}
 
 function tampilProduk(data=produk){
 
@@ -210,4 +237,4 @@ function nonaktifProduk(index){
 
 
 // di luar fungsi
-tampilProduk();
+ambilProdukFirebase();
