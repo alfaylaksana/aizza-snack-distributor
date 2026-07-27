@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Tes Firebase AIZZAY</h2>
+<div id="hasil">Memuat...</div>
+
+<script type="module">
+import { db } from "./modules/firebase.js";
+import { collection, getDocs } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+const querySnapshot = await getDocs(collection(db, "users"));
+
+let teks = "";
+
+querySnapshot.forEach((doc) => {
+  teks += `
+    ID: ${doc.id}<br>
+    Nama: ${doc.data().nama}<br>
+    Role: ${doc.data().role}<br><br>
+  `;
+});
+
+document.getElementById("hasil").innerHTML = teks;
+
+</script>
+
+</body>
+</html>
