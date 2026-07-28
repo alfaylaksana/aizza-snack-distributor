@@ -56,10 +56,9 @@ fetch("modules/produk/produk.html")
 
 document.getElementById("konten").innerHTML = data;
 
-let script = document.createElement("script");
-script.type = "module";
-script.src = "modules/produk/produk.js";
-document.body.appendChild(script);
+document.getElementById("konten").innerHTML = data;
+
+import("./modules/produk/produk.js");
 
 });
 
