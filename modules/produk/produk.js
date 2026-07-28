@@ -1,3 +1,4 @@
+alert("TES AIZZAY");
 alert("produk.js berjalan");
 import { db } from "../../firebase.js";
 
