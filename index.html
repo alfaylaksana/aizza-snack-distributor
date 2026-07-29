@@ -39,7 +39,13 @@ async function bukaProduk(){
  if(lama) lama.remove();
  import("modules/produk/produk.js")
     .then(() => alert("IMPORT BERHASIL"))
-    .catch(e => alert("IMPORT GAGAL\n\n" + e));
+    .catch(e => {
+        alert(
+            "IMPORT GAGAL\n\n" +
+            e.name + "\n\n" +
+            e.message
+        );
+    });
 }
 </script>
 </body>
