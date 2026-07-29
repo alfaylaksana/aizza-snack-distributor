@@ -1,9 +1,9 @@
-// import { db } from "../../firebase.js";
+import { db } from "../../firebase.js";
 
-// import {
-//   collection,
-//   getDocs
-// } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {
+collection,
+getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 alert("TES AIZZAY");
 alert("produk.js berjalan");
@@ -25,45 +25,15 @@ function simpanStorage(){
 // AMBIL DATA FIREBASE
 async function ambilProdukFirebase(){
 
-    try {
+    alert("Mulai Firestore");
 
-        console.log("Mulai membaca Firestore...");
+    const snapshot = await getDocs(
+        collection(db,"produk")
+    );
 
-        const snapshot = await getDocs(
-            collection(db,"produk")
-        );
-
-
-        produk = [];
-
-
-        snapshot.forEach((doc)=>{
-
-            produk.push({
-                id: doc.id,
-                ...doc.data()
-            });
-
-        });
-
-
-        console.log("Jumlah produk:", produk.length);
-
-
-        tampilProduk();
-
-
-    } catch(error){
-
-        console.error(
-            "Gagal membaca Firebase:",
-            error
-        );
-
-    }
+    alert("Jumlah data: " + snapshot.size);
 
 }
-
 
 // TAMPIL PRODUK
 function tampilProduk(data = produk){
