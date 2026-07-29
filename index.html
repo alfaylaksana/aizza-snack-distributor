@@ -32,12 +32,10 @@
 <script src="app.js"></script>
 <script>
 async function bukaProduk(){
- const res=await fetch("/aizzay-snack-distributor/modules/produk/produk.html");
+ const res=await fetch("modules/produk/produk.html");
  const data=await res.text();
  document.getElementById("konten").innerHTML=data;
- 
-alert("Akan memuat produk.js");
-await import("./modules/produk/produk.js?v=" + Date.now());
+ await import("./modules/produk/produk.js?v=" + Date.now());
 }
 </script>
 </body>
