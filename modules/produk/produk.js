@@ -1,5 +1,4 @@
-import { db } from "/aizzay-snack-distributor/firebase.js";
-
+import { db } from "../firebase.js";
 import {
 collection,
 getDocs
