@@ -138,3 +138,155 @@ function tampilProduk(data = produk){
     });
 
 }
+// CARI PRODUK
+function cariProduk(){
+
+    let kata = document
+        .getElementById("cariProduk")
+        .value
+        .toLowerCase();
+
+    let hasil = produk.filter(p =>
+        (p.nama || "")
+        .toLowerCase()
+        .includes(kata)
+    );
+
+    tampilProduk(hasil);
+
+}
+
+
+
+// SIMPAN PRODUK
+function simpanProduk(){
+
+    let data = {
+
+        kode: document
+            .getElementById("kode")
+            .value
+            .toUpperCase(),
+
+        nama: document
+            .getElementById("nama")
+            .value,
+
+        kategori: document
+            .getElementById("kategori")
+            .value,
+
+        berat: Number(
+            document
+            .getElementById("berat")
+            .value
+        ),
+
+        modal: Number(
+            document
+            .getElementById("modal")
+            .value
+        ),
+
+        hargaToko: Number(
+            document
+            .getElementById("hargaToko")
+            .value
+        ),
+
+        hargaJual: Number(
+            document
+            .getElementById("hargaJual")
+            .value
+        ),
+
+        catatan: document
+            .getElementById("catatan")
+            .value,
+
+        status: "aktif"
+
+    };
+
+
+    if(!data.kode || !data.nama){
+
+        alert("Kode dan Nama wajib diisi");
+        return;
+
+    }
+
+
+    let cek = produk.some(
+        p => p.kode === data.kode
+    );
+
+    if(cek){
+
+        alert("Kode produk sudah ada");
+        return;
+
+    }
+
+
+    produk.push(data);
+
+    simpanStorage();
+
+    tampilProduk();
+
+    alert("Produk berhasil ditambahkan");
+
+}
+
+
+
+// EDIT PRODUK
+function editProduk(index){
+
+    let p = produk[index];
+
+    document.getElementById("kode").value = p.kode;
+    document.getElementById("nama").value = p.nama;
+    document.getElementById("kategori").value = p.kategori || "";
+    document.getElementById("berat").value = p.berat;
+    document.getElementById("modal").value = p.modal || "";
+    document.getElementById("hargaToko").value = p.hargaToko;
+    document.getElementById("hargaJual").value = p.hargaJual;
+    document.getElementById("catatan").value = p.catatan || "";
+
+    produk.splice(index,1);
+
+    simpanStorage();
+
+    alert("Silakan ubah data lalu tekan Simpan");
+
+}
+
+
+
+// NONAKTIF PRODUK
+function nonaktifProduk(index){
+
+    produk[index].status = "nonaktif";
+
+    simpanStorage();
+
+    tampilProduk();
+
+    alert("Produk berhasil dinonaktifkan");
+
+}
+
+
+
+// AGAR BISA DIPANGGIL DARI HTML
+window.simpanProduk = simpanProduk;
+window.editProduk = editProduk;
+window.nonaktifProduk = nonaktifProduk;
+window.cariProduk = cariProduk;
+
+
+
+// MULAI MEMBACA FIREBASE
+ambilProdukFirebase();
