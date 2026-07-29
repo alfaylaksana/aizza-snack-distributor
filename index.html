@@ -35,17 +35,12 @@ async function bukaProduk(){
  const res=await fetch("modules/produk/produk.html");
  const data=await res.text();
  document.getElementById("konten").innerHTML=data;
- const lama=document.getElementById("produk-module");
- if(lama) lama.remove();
- import("modules/produk/produk.js")
-    .then(() => alert("IMPORT BERHASIL"))
-    .catch(e => {
-        alert(
-            "IMPORT GAGAL\n\n" +
-            e.name + "\n\n" +
-            e.message
-        );
-    });
+ const script = document.createElement("script");
+script.type = "module";
+script.src = "modules/produk/produk.js?v=2";
+
+alert("Akan memuat produk.js");
+document.body.appendChild(script);
 }
 </script>
 </body>
