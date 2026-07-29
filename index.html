@@ -40,7 +40,7 @@ script.type = "module";
 script.src = "modules/produk/produk.js?v=2";
 
 alert("Akan memuat produk.js");
-document.body.appendChild(script);
+await import("./modules/produk/produk.js?v=" + Date.now());
 }
 </script>
 </body>
