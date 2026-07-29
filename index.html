@@ -35,10 +35,7 @@ async function bukaProduk(){
  const res=await fetch("/aizzay-snack-distributor/modules/produk/produk.html");
  const data=await res.text();
  document.getElementById("konten").innerHTML=data;
- const script = document.createElement("script");
-script.type = "module";
-script.src = "/aizzay-snack-distributor/modules/produk/produk.js?v=3";
-
+ 
 alert("Akan memuat produk.js");
 await import("./modules/produk/produk.js?v=" + Date.now());
 }
