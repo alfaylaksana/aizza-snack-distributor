@@ -37,12 +37,9 @@ async function bukaProduk(){
  document.getElementById("konten").innerHTML=data;
  const lama=document.getElementById("produk-module");
  if(lama) lama.remove();
- const script=document.createElement("script");
- script.id="produk-module";
- script.type="module";
- script.src="modules/produk/produk.js?v=2";
- alert("Akan memuat produk.js");
-document.body.appendChild(script);
+ import("modules/produk/produk.js")
+    .then(() => alert("IMPORT BERHASIL"))
+    .catch(e => alert("IMPORT GAGAL\n\n" + e));
 }
 </script>
 </body>
