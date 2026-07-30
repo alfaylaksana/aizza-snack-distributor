@@ -7,10 +7,6 @@ doc,
 setDoc
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
-alert("TES AIZZAY");
-alert("produk.js berjalan");
-
-
 // DATA PRODUK
 let produk = JSON.parse(localStorage.getItem("produkAizzay")) || [];
 
