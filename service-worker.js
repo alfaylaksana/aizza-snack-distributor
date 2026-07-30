@@ -1,7 +1,7 @@
 // AIZZAY Snack Distributor
 // Service Worker Versi 0.1
 
-const CACHE_NAME = "aizzay-v1";
+const CACHE_NAME = "aizzay-v2";
 
 const FILES_TO_CACHE = [
   "./",
@@ -12,8 +12,10 @@ const FILES_TO_CACHE = [
 ];
 
 
-// Saat aplikasi pertama dipasang
+// Saat aplikasi pertama dipasang / ada versi baru
 self.addEventListener("install", function(event){
+
+  self.skipWaiting(); // langsung aktifkan versi baru, tidak nunggu semua tab ditutup
 
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -22,6 +24,32 @@ self.addEventListener("install", function(event){
       return cache.addAll(FILES_TO_CACHE);
 
     })
+  );
+
+});
+
+
+// Hapus cache versi lama begitu versi baru aktif
+self.addEventListener("activate", function(event){
+
+  event.waitUntil(
+
+    caches.keys().then(function(daftarCache){
+
+      return Promise.all(
+
+        daftarCache
+          .filter(function(nama){ return nama !== CACHE_NAME; })
+          .map(function(nama){ return caches.delete(nama); })
+
+      );
+
+    }).then(function(){
+
+      return self.clients.claim(); // ambil alih tab yang sudah terbuka juga
+
+    })
+
   );
 
 });
