@@ -1,0 +1,92 @@
+<style>
+/* Kartu produk: teks normal, kecuali nama produk (tetap bold) */
+.produk-page .card {
+    font-weight: normal;
+}
+.produk-page .card h3 {
+    font-weight: normal;
+}
+.produk-page .card b {
+    font-weight: bold;
+}
+
+/* Paksa semua teks di kartu produk jadi 11px, terlepas dari aturan luar */
+.produk-page .card,
+.produk-page .card * {
+    font-size: 11px;
+}
+
+/* Nama produk tetap sedikit lebih besar & bold supaya menonjol */
+.produk-page .card b {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Warna status */
+.produk-page .card .status-aktif {
+    color: green;
+    font-weight: normal;
+}
+.produk-page .card .status-nonaktif {
+    color: red;
+    font-weight: normal;
+}
+
+/* Tombol ikon kecil, tanpa teks, dipaksa seragam */
+.produk-page .card .btn-icon {
+    font-size: 11px;
+    padding: 2px 5px;
+    line-height: 1;
+}
+
+/* Badge sinkron kecil, tanpa teks, dipaksa seragam */
+.produk-page .card .sinkron-badge {
+    font-size: 11px;
+    line-height: 1;
+}
+</style>
+
+<section class="produk-page">
+
+<h2>📦 Master Produk</h2>
+
+<div class="form-produk">
+
+<input id="kode" placeholder="Kode Produk">
+
+<input id="nama" placeholder="Nama Produk">
+
+<input id="kategori" placeholder="Kategori">
+
+<input id="berat" type="number" step="0.1" placeholder="Berat Bal (kg)">
+
+<input id="modal" type="number" placeholder="Harga Modal Bal">
+
+<input id="hargaToko" type="number" placeholder="Harga ke Toko">
+
+<input id="hargaJual" type="number" placeholder="Harga Jual">
+
+<textarea id="catatan" placeholder="Catatan"></textarea>
+
+<button onclick="simpanProduk()">
+💾 Simpan
+</button>
+
+</div>
+
+
+<hr>
+
+
+<h3>Daftar Produk</h3>
+
+<input 
+id="cariProduk"
+placeholder="🔍 Cari..."
+onkeyup="cariProduk()">
+
+
+<div id="daftarProduk"></div>
+
+
+</section>
