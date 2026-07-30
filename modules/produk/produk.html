@@ -1,0 +1,87 @@
+<style>
+.produk-page {
+    font-size: 15px;
+}
+.produk-page h2 {
+    font-size: 17px;
+}
+.produk-page h3 {
+    font-size: 16px;
+}
+
+/* Kartu produk: teks normal, kecuali nama produk (tetap bold) */
+.produk-page .card {
+    font-weight: normal;
+}
+.produk-page .card h3 {
+    font-weight: normal;
+}
+.produk-page .card b {
+    font-weight: bold;
+}
+
+/* Warna status */
+.status-aktif {
+    color: green;
+}
+.status-nonaktif {
+    color: red;
+}
+
+/* Tombol ikon kecil, tanpa teks */
+.produk-page .card .btn-icon {
+    font-size: 12px;
+    padding: 2px 6px;
+    line-height: 1;
+}
+
+/* Badge sinkron kecil, tanpa teks */
+.sinkron-badge {
+    font-size: 12px;
+}
+</style>
+
+<section class="produk-page">
+
+<h2>📦 Master Produk</h2>
+
+<div class="form-produk">
+
+<input id="kode" placeholder="Kode Produk">
+
+<input id="nama" placeholder="Nama Produk">
+
+<input id="kategori" placeholder="Kategori">
+
+<input id="berat" type="number" step="0.1" placeholder="Berat Bal (kg)">
+
+<input id="modal" type="number" placeholder="Harga Modal Bal">
+
+<input id="hargaToko" type="number" placeholder="Harga ke Toko">
+
+<input id="hargaJual" type="number" placeholder="Harga Jual">
+
+<textarea id="catatan" placeholder="Catatan"></textarea>
+
+<button onclick="simpanProduk()">
+💾 Simpan
+</button>
+
+</div>
+
+
+<hr>
+
+
+<h3>Daftar Produk</h3>
+
+<input 
+id="cariProduk"
+placeholder="🔍 Cari..."
+onkeyup="cariProduk()">
+
+
+<div id="daftarProduk"></div>
+
+
+</section>
