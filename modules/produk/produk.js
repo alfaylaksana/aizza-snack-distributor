@@ -2,7 +2,9 @@ import { db } from "../firebase.js";
 
 import {
 collection,
-getDocs
+getDocs,
+doc,
+setDoc
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
 alert("TES AIZZAY");
@@ -43,11 +45,13 @@ async function ambilProdukFirebase(){
             );
 
             if(indexLokal >= 0){
-                // Sudah ada di lokal -> perbarui dengan versi Firebase
-                produk[indexLokal] = dataFirebase;
+                if(produk[indexLokal].sinkron !== false){
+                    // Data lokal sudah tersinkron sebelumnya -> aman ditimpa versi Firebase
+                    produk[indexLokal] = {...dataFirebase, sinkron:true};
+                }
+                // Kalau sinkron:false -> ada perubahan lokal yang belum terkirim, jangan ditimpa dulu
             } else {
-                // Belum ada di lokal -> tambahkan
-                produk.push(dataFirebase);
+                produk.push({...dataFirebase, sinkron:true});
             }
 
         });
@@ -64,7 +68,43 @@ async function ambilProdukFirebase(){
 
 }
 
-// TAMPIL PRODUK
+// KIRIM DATA LOKAL YANG BELUM TERSINKRON KE FIREBASE
+async function sinkronKeFirebase(){
+
+    let adaPerubahan = false;
+
+    for(const p of produk){
+
+        if(p.sinkron === false){
+
+            try {
+
+                await setDoc(doc(db,"produk",p.kode), p);
+
+                p.sinkron = true;
+                adaPerubahan = true;
+
+            } catch (err) {
+
+                // Masih offline / gagal kirim -> biarkan sinkron:false, dicoba lagi nanti
+                console.log("Gagal sinkron produk " + p.kode + ":", err.message);
+
+            }
+
+        }
+
+    }
+
+    if(adaPerubahan){
+        simpanStorage();
+    }
+
+}
+
+// COBA SINKRON OTOMATIS SETIAP KALI KONEKSI INTERNET KEMBALI
+window.addEventListener("online", sinkronKeFirebase);
+
+
 function tampilProduk(data = produk){
 
     let area = document.getElementById(
@@ -202,7 +242,9 @@ function simpanProduk(){
             .getElementById("catatan")
             .value,
 
-        status: "aktif"
+        status: "aktif",
+
+        sinkron: false
 
     };
 
@@ -234,6 +276,8 @@ function simpanProduk(){
     tampilProduk();
 
     alert("Produk berhasil ditambahkan");
+
+    sinkronKeFirebase();
 
 }
 
@@ -267,12 +311,15 @@ function editProduk(index){
 function nonaktifProduk(index){
 
     produk[index].status = "nonaktif";
+    produk[index].sinkron = false;
 
     simpanStorage();
 
     tampilProduk();
 
     alert("Produk berhasil dinonaktifkan");
+
+    sinkronKeFirebase();
 
 }
 
@@ -286,5 +333,5 @@ window.cariProduk = cariProduk;
 
 
 
-// MULAI MEMBACA FIREBASE
-ambilProdukFirebase();
+// MULAI MEMBACA FIREBASE, LALU COBA KIRIM SISA DATA YANG BELUM TERSINKRON
+ambilProdukFirebase().then(sinkronKeFirebase);
