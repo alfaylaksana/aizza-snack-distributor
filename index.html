@@ -19,7 +19,7 @@
 </section>
 <section class="menu">
 <button onclick="bukaProduk()">📦<br>Master Produk</button>
-<button>🛒<br>Belanja</button>
+<button onclick="bukaBelanja()">🛒<br>Belanja</button>
 <button>🏭<br>Packing</button>
 <button>🏪<br>Toko</button>
 <button>💰<br>Kas</button>
@@ -36,6 +36,13 @@ async function bukaProduk(){
  const data=await res.text();
  document.getElementById("konten").innerHTML=data;
  await import("./modules/produk/produk.js?v=" + Date.now());
+}
+
+async function bukaBelanja(){
+ const res=await fetch("modules/belanja/belanja.html");
+ const data=await res.text();
+ document.getElementById("konten").innerHTML=data;
+ await import("./modules/belanja/belanja.js?v=" + Date.now());
 }
 </script>
 </body>
