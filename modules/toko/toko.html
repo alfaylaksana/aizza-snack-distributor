@@ -132,13 +132,13 @@
 
 <div id="daftarItemSettle"></div>
 
-<select id="statusBayarSettle">
+<select id="statusBayarSettle" onchange="toggleJumlahDibayarSettle()">
 <option value="lunas">Lunas</option>
 <option value="hutang">Hutang</option>
 <option value="cicilan">Cicilan</option>
 </select>
 
-<input id="jumlahDibayarSettle" type="number" placeholder="Jumlah Dibayar" style="display:none">
+<input id="jumlahDibayarSettle" type="number" placeholder="Jumlah Dibayar" style="display:none" oninput="simpanDraftSettle()">
 
 <p id="totalSettlePreview"></p>
 
