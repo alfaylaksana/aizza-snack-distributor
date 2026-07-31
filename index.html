@@ -21,7 +21,7 @@
 <button onclick="bukaProduk()">📦<br>Master Produk</button>
 <button onclick="bukaBelanja()">🛒<br>Belanja</button>
 <button>🏭<br>Packing</button>
-<button>🏪<br>Toko</button>
+<button onclick="bukaToko()">🏪<br>Toko</button>
 <button>💰<br>Kas</button>
 <button>📊<br>Laporan</button>
 <button>⚙️<br>Pengaturan</button>
@@ -57,6 +57,13 @@ async function bukaBelanja(){
  const data=await res.text();
  document.getElementById("konten").innerHTML=data;
  await import("./modules/belanja/belanja.js?v=" + Date.now());
+}
+
+async function bukaToko(){
+ const res=await fetch("modules/toko/toko.html");
+ const data=await res.text();
+ document.getElementById("konten").innerHTML=data;
+ await import("./modules/toko/toko.js?v=" + Date.now());
 }
 </script>
 </body>
