@@ -1,14 +1,23 @@
 // AIZZAY Snack Distributor
-// Service Worker Versi 0.11
+// Service Worker Versi 0.12
 
-const CACHE_NAME = "aizzay-v11";
+const CACHE_NAME = "aizzay-v12";
 
 const FILES_TO_CACHE = [
   "./",
   "./index.html",
   "./style.css",
   "./app.js",
-  "./manifest.json"
+  "./manifest.json",
+  "./modules/firebase.js",
+  "./modules/produk/produk.html",
+  "./modules/produk/produk.js",
+  "./modules/belanja/belanja.html",
+  "./modules/belanja/belanja.js",
+  "./modules/toko/toko.html",
+  "./modules/toko/toko.js",
+  "./modules/pengaturan/pengaturan.html",
+  "./modules/pengaturan/pengaturan.js"
 ];
 
 
@@ -21,7 +30,15 @@ self.addEventListener("install", function(event){
     caches.open(CACHE_NAME)
     .then(function(cache){
 
-      return cache.addAll(FILES_TO_CACHE);
+      // Cache satu per satu (bukan addAll) supaya kalau ada 1 file gagal
+      // (misal path salah), file lainnya tetap berhasil ke-cache
+      return Promise.all(
+        FILES_TO_CACHE.map(function(file){
+          return cache.add(file).catch(function(err){
+            console.log("Gagal precache: " + file, err.message);
+          });
+        })
+      );
 
     })
   );
