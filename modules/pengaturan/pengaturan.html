@@ -30,8 +30,19 @@
 </div>
 
 <div class="card">
-<h3>♻️ Pulihkan Data (Import)</h3>
-<p>Pulihkan data dari file backup JSON. <span class="peringatan">Ini akan mengganti semua data Produk, Belanja, dan Toko yang ada di HP ini.</span> Akan ada konfirmasi sebelum data ditimpa.</p>
+<h3>♻️ Pulihkan / Gabungkan Data (Import)</h3>
+<p>Pilih mode dulu, baru pilih file backup JSON:</p>
+
+<label style="display:block;margin-bottom:6px;">
+<input type="radio" name="modeImport" value="gabung" checked>
+<b>Gabungkan</b> — data yang sudah ada di HP tetap dipakai, data dari file yang belum ada ditambahkan
+</label>
+
+<label style="display:block;margin-bottom:10px;">
+<input type="radio" name="modeImport" value="timpa">
+<b>Timpa Semua</b> — <span class="peringatan">ganti total, data lama di HP hilang</span>, diganti persis isi file
+</label>
+
 <input type="file" id="fileImportJSON" accept="application/json" onchange="importData(event)">
 </div>
 
