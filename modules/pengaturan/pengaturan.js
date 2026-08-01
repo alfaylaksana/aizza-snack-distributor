@@ -31,11 +31,28 @@ function exportData(){
 }
 
 
-// IMPORT DATA DARI FILE JSON (DENGAN KONFIRMASI SEBELUM MENIMPA)
+// GABUNGKAN DATA LAMA + DATA IMPORT, TANPA MENIMPA YANG SUDAH ADA (COCOKKAN BERDASAR KEY UNIK)
+function gabungkanArray(existing, incoming, keyField){
+
+    let existingKeys = new Set(existing.map(x => x[keyField]));
+
+    let tambahan = incoming.filter(x => !existingKeys.has(x[keyField]));
+
+    return {
+        hasil: existing.concat(tambahan),
+        jumlahTambahan: tambahan.length
+    };
+
+}
+
+
+// IMPORT DATA DARI FILE JSON (MODE GABUNG ATAU TIMPA, DENGAN KONFIRMASI)
 function importData(event){
 
     let file = event.target.files[0];
     if(!file) return;
+
+    let mode = document.querySelector('input[name="modeImport"]:checked').value;
 
     let reader = new FileReader();
 
@@ -57,20 +74,67 @@ function importData(event){
             return;
         }
 
-        let ringkasan =
-            "Produk: " + (data.produk ? data.produk.length : 0) + " data\n" +
-            "Belanja: " + (data.belanja ? data.belanja.length : 0) + " data\n" +
-            "Toko: " + (data.titipan ? data.titipan.length : 0) + " data" +
-            (data.tanggalExport
-                ? "\n\nDiexport pada: " + new Date(data.tanggalExport).toLocaleString("id-ID")
-                : "");
+        if(mode === "timpa"){
+
+            let ringkasan =
+                "Produk: " + (data.produk ? data.produk.length : 0) + " data\n" +
+                "Belanja: " + (data.belanja ? data.belanja.length : 0) + " data\n" +
+                "Toko: " + (data.titipan ? data.titipan.length : 0) + " data" +
+                (data.tanggalExport
+                    ? "\n\nDiexport pada: " + new Date(data.tanggalExport).toLocaleString("id-ID")
+                    : "");
+
+            let konfirmasi = confirm(
+                "PERINGATAN!\n\nIni akan MENGGANTI SEMUA data Produk, Belanja, dan Toko " +
+                "yang ada di HP ini dengan isi file berikut:\n\n" +
+                ringkasan +
+                "\n\nData yang sekarang akan HILANG dan tidak bisa dikembalikan kecuali " +
+                "Antum punya backup lain. Lanjutkan?"
+            );
+
+            if(!konfirmasi){
+                event.target.value = "";
+                return;
+            }
+
+            if(data.produk) localStorage.setItem("produkAizzay", JSON.stringify(data.produk));
+            if(data.belanja) localStorage.setItem("belanjaAizzay", JSON.stringify(data.belanja));
+            if(data.titipan) localStorage.setItem("titipanAizzay", JSON.stringify(data.titipan));
+
+            alert("Import (timpa total) berhasil. Aplikasi akan dimuat ulang.");
+
+            location.reload();
+
+            return;
+
+        }
+
+        // MODE GABUNG
+        let produkLama = JSON.parse(localStorage.getItem("produkAizzay")) || [];
+        let belanjaLama = JSON.parse(localStorage.getItem("belanjaAizzay")) || [];
+        let titipanLama = JSON.parse(localStorage.getItem("titipanAizzay")) || [];
+
+        let hasilProduk = gabungkanArray(produkLama, data.produk || [], "kode");
+        let hasilBelanja = gabungkanArray(belanjaLama, data.belanja || [], "id");
+        let hasilTitipan = gabungkanArray(titipanLama, data.titipan || [], "id");
+
+        let ringkasanGabung =
+            "Produk: +" + hasilProduk.jumlahTambahan + " data baru\n" +
+            "Belanja: +" + hasilBelanja.jumlahTambahan + " data baru\n" +
+            "Toko: +" + hasilTitipan.jumlahTambahan + " data baru\n\n" +
+            "Data yang sudah ada di HP tidak akan diubah.";
+
+        let totalTambahan =
+            hasilProduk.jumlahTambahan + hasilBelanja.jumlahTambahan + hasilTitipan.jumlahTambahan;
+
+        if(totalTambahan === 0){
+            alert("Tidak ada data baru untuk ditambahkan — semua data di file ini sudah ada di HP.");
+            event.target.value = "";
+            return;
+        }
 
         let konfirmasi = confirm(
-            "PERINGATAN!\n\nIni akan MENGGANTI SEMUA data Produk, Belanja, dan Toko " +
-            "yang ada di HP ini dengan isi file berikut:\n\n" +
-            ringkasan +
-            "\n\nData yang sekarang akan HILANG dan tidak bisa dikembalikan kecuali " +
-            "Antum punya backup lain. Lanjutkan?"
+            "Gabungkan data dari file ini?\n\n" + ringkasanGabung + "\n\nLanjutkan?"
         );
 
         if(!konfirmasi){
@@ -78,11 +142,11 @@ function importData(event){
             return;
         }
 
-        if(data.produk) localStorage.setItem("produkAizzay", JSON.stringify(data.produk));
-        if(data.belanja) localStorage.setItem("belanjaAizzay", JSON.stringify(data.belanja));
-        if(data.titipan) localStorage.setItem("titipanAizzay", JSON.stringify(data.titipan));
+        localStorage.setItem("produkAizzay", JSON.stringify(hasilProduk.hasil));
+        localStorage.setItem("belanjaAizzay", JSON.stringify(hasilBelanja.hasil));
+        localStorage.setItem("titipanAizzay", JSON.stringify(hasilTitipan.hasil));
 
-        alert("Import berhasil. Aplikasi akan dimuat ulang.");
+        alert("Gabung data berhasil. Aplikasi akan dimuat ulang.");
 
         location.reload();
 
