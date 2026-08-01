@@ -1,7 +1,7 @@
 // AIZZAY Snack Distributor
-// Service Worker Versi 0.6
+// Service Worker Versi 0.7
 
-const CACHE_NAME = "aizzay-v6";
+const CACHE_NAME = "aizzay-v7";
 
 const FILES_TO_CACHE = [
   "./",
@@ -67,7 +67,7 @@ self.addEventListener("fetch", function(event){
 
   event.respondWith(
 
-    caches.match(event.request)
+    caches.match(event.request, { ignoreSearch: true })
     .then(function(cachedResponse){
 
       if (cachedResponse) {
