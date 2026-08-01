@@ -1,0 +1,38 @@
+<style>
+.pengaturan-page .card {
+    margin-bottom: 12px;
+}
+.pengaturan-page .card h3 {
+    margin-top: 0;
+}
+.pengaturan-page .card p {
+    font-size: 13px;
+    color: #555;
+}
+.pengaturan-page .peringatan {
+    color: #b03a2e;
+    font-weight: bold;
+}
+.pengaturan-page input[type="file"] {
+    font-size: 12px;
+    width: 100%;
+}
+</style>
+
+<section class="pengaturan-page">
+
+<h2>⚙️ Pengaturan</h2>
+
+<div class="card">
+<h3>💾 Backup Data (Export)</h3>
+<p>Unduh semua data Produk, Belanja, dan Toko dalam satu file JSON. Simpan file ini di tempat aman (Google Drive, dsb) sebagai cadangan.</p>
+<button onclick="exportData()">⬇️ Export Data (JSON)</button>
+</div>
+
+<div class="card">
+<h3>♻️ Pulihkan Data (Import)</h3>
+<p>Pulihkan data dari file backup JSON. <span class="peringatan">Ini akan mengganti semua data Produk, Belanja, dan Toko yang ada di HP ini.</span> Akan ada konfirmasi sebelum data ditimpa.</p>
+<input type="file" id="fileImportJSON" accept="application/json" onchange="importData(event)">
+</div>
+
+</section>

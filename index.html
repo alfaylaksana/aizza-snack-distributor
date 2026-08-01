@@ -26,7 +26,7 @@
 <button onclick="bukaToko()">🏪<br>Toko</button>
 <button>💰<br>Kas</button>
 <button>📊<br>Laporan</button>
-<button>⚙️<br>Pengaturan</button>
+<button onclick="bukaPengaturan()">⚙️<br>Pengaturan</button>
 </section>
 <div id="konten"></div>
 </main>
@@ -66,6 +66,13 @@ async function bukaToko(){
  const data=await res.text();
  document.getElementById("konten").innerHTML=data;
  await import("./modules/toko/toko.js?v=" + Date.now());
+}
+
+async function bukaPengaturan(){
+ const res=await fetch("modules/pengaturan/pengaturan.html");
+ const data=await res.text();
+ document.getElementById("konten").innerHTML=data;
+ await import("./modules/pengaturan/pengaturan.js?v=" + Date.now());
 }
 </script>
 </body>
