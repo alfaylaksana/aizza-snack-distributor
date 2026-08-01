@@ -22,7 +22,7 @@
 <section class="menu">
 <button onclick="bukaProduk()">📦<br>Master Produk</button>
 <button onclick="bukaBelanja()">🛒<br>Belanja</button>
-<button>🏭<br>Packing</button>
+<button onclick="bukaPacking()">🏭<br>Packing</button>
 <button onclick="bukaToko()">🏪<br>Toko</button>
 <button onclick="bukaKas()">💰<br>Kas</button>
 <button>📊<br>Laporan</button>
@@ -66,6 +66,13 @@ async function bukaToko(){
  const data=await res.text();
  document.getElementById("konten").innerHTML=data;
  await import("./modules/toko/toko.js?v=" + Date.now());
+}
+
+async function bukaPacking(){
+ const res=await fetch("modules/packing/packing.html");
+ const data=await res.text();
+ document.getElementById("konten").innerHTML=data;
+ await import("./modules/packing/packing.js?v=" + Date.now());
 }
 
 async function bukaKas(){
