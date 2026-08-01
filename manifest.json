@@ -1,6 +1,6 @@
 {
-  "name": "AIZZA Snack Distributor",
-  "short_name": "AIZZA Snack",
+  "name": "AIZZAY Snack Distributor",
+  "short_name": "AIZZAY Snack",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f8f5ef",
