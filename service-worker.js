@@ -1,7 +1,7 @@
 // AIZZAY Snack Distributor
-// Service Worker Versi 0.13
+// Service Worker Versi 0.14
 
-const CACHE_NAME = "aizzay-v13";
+const CACHE_NAME = "aizzay-v14";
 
 const FILES_TO_CACHE = [
   "./",
