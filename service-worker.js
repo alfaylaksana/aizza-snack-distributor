@@ -1,7 +1,7 @@
 // AIZZAY Snack Distributor
-// Service Worker Versi 0.5
+// Service Worker Versi 0.6
 
-const CACHE_NAME = "aizzay-v5";
+const CACHE_NAME = "aizzay-v6";
 
 const FILES_TO_CACHE = [
   "./",
@@ -55,15 +55,41 @@ self.addEventListener("activate", function(event){
 });
 
 
-// Mengambil file dari cache jika tersedia
+// Mengambil file dari cache jika tersedia, kalau tidak: ambil dari jaringan
+// lalu simpan otomatis ke cache supaya tersedia lagi saat offline nanti
 self.addEventListener("fetch", function(event){
+
+  // Cuma urus request GET yang searah sama domain sendiri
+  // (request ke Firebase/Firestore dibiarkan lewat apa adanya)
+  if (event.request.method !== "GET" || !event.request.url.startsWith(self.location.origin)) {
+    return;
+  }
 
   event.respondWith(
 
     caches.match(event.request)
-    .then(function(response){
+    .then(function(cachedResponse){
 
-      return response || fetch(event.request);
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+
+      return fetch(event.request)
+        .then(function(networkResponse){
+
+          return caches.open(CACHE_NAME).then(function(cache){
+            cache.put(event.request, networkResponse.clone());
+            return networkResponse;
+          });
+
+        })
+        .catch(function(){
+          // Offline dan file belum sempat kesimpan di cache
+          return new Response(
+            "Sedang offline dan halaman ini belum pernah dibuka online sebelumnya.",
+            { status: 503, headers: { "Content-Type": "text/plain" } }
+          );
+        });
 
     })
 
