@@ -1,0 +1,184 @@
+<style>
+.kas-page .saldo-kas {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+.kas-page .saldo-card {
+    flex: 1;
+    text-align: center;
+}
+.kas-page .saldo-card h3 {
+    margin: 0 0 4px 0;
+    font-size: 13px;
+}
+.kas-page .saldo-nominal {
+    font-size: 18px;
+    font-weight: bold;
+    color: #c96b24;
+    margin: 0;
+}
+.kas-page .card label {
+    display: block;
+    font-size: 12px;
+    margin-top: 8px;
+    margin-bottom: 2px;
+}
+.kas-page .card input,
+.kas-page .card select {
+    width: 100%;
+    padding: 6px;
+    font-size: 13px;
+    box-sizing: border-box;
+}
+.kas-page .card button {
+    margin-top: 10px;
+    width: 100%;
+}
+.kas-page .bulan-group {
+    margin-bottom: 10px;
+    border: 1px solid #e5ddd2;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.kas-page .bulan-group summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 8px 10px;
+    background: #c96b24;
+    color: #fff8f0;
+    font-size: 13px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.kas-page .bulan-group summary::-webkit-details-marker {
+    display: none;
+}
+.kas-page .bulan-group summary::after {
+    content: "▸";
+    transition: transform 0.15s ease;
+}
+.kas-page .bulan-group[open] summary::after {
+    transform: rotate(90deg);
+}
+.kas-page .bulan-group .bulan-isi {
+    padding: 8px;
+    background: #faf7f2;
+}
+.kas-page .baris-transaksi {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 12px;
+}
+.kas-page .baris-transaksi:last-child {
+    border-bottom: none;
+}
+.kas-page .baris-kiri {
+    flex: 1;
+}
+.kas-page .baris-catatan {
+    color: #777;
+}
+.kas-page .nominal-masuk {
+    color: #1e8449;
+    font-weight: bold;
+}
+.kas-page .nominal-keluar {
+    color: #b03a2e;
+    font-weight: bold;
+}
+.kas-page .label-kas {
+    display: inline-block;
+    font-size: 10px;
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: #eee;
+    margin-left: 4px;
+}
+</style>
+
+<section class="kas-page">
+
+<h2>💰 Kas</h2>
+
+<div class="saldo-kas">
+    <div class="card saldo-card">
+        <h3>Kas Usaha</h3>
+        <p class="saldo-nominal" id="saldoUsaha">Rp 0</p>
+    </div>
+    <div class="card saldo-card">
+        <h3>Kas Pribadi</h3>
+        <p class="saldo-nominal" id="saldoPribadi">Rp 0</p>
+    </div>
+</div>
+
+<div class="card">
+<h3>➕ Catat Transaksi</h3>
+
+<label>Tanggal</label>
+<input type="date" id="tanggalKas">
+
+<label>Kas</label>
+<select id="kasTujuan">
+<option value="usaha">Kas Usaha</option>
+<option value="pribadi">Kas Pribadi</option>
+</select>
+
+<label>Jenis</label>
+<select id="jenisKas">
+<option value="masuk">Pemasukan</option>
+<option value="keluar">Pengeluaran</option>
+</select>
+
+<label>Nominal (Rp)</label>
+<input type="number" id="nominalKas" min="0" placeholder="0">
+
+<label>Catatan</label>
+<input type="text" id="catatanKas" placeholder="misal: hasil jualan, beli bensin, dll">
+
+<button onclick="simpanTransaksiKas()">💾 Simpan Transaksi</button>
+</div>
+
+<div class="card">
+<h3>🔁 Transfer Antar Kas</h3>
+
+<label>Dari</label>
+<select id="transferDari">
+<option value="usaha">Kas Usaha</option>
+<option value="pribadi">Kas Pribadi</option>
+</select>
+
+<label>Ke</label>
+<select id="transferKe">
+<option value="pribadi">Kas Pribadi</option>
+<option value="usaha">Kas Usaha</option>
+</select>
+
+<label>Nominal (Rp)</label>
+<input type="number" id="nominalTransfer" min="0" placeholder="0">
+
+<label>Catatan (opsional)</label>
+<input type="text" id="catatanTransfer" placeholder="misal: ambil buat kebutuhan rumah">
+
+<button onclick="transferKas()">🔁 Transfer</button>
+</div>
+
+<div class="card">
+<h3>📜 Riwayat Transaksi</h3>
+
+<label>Tampilkan</label>
+<select id="filterKas" onchange="tampilKas()">
+<option value="semua">Semua Kas</option>
+<option value="usaha">Kas Usaha</option>
+<option value="pribadi">Kas Pribadi</option>
+</select>
+
+<div id="daftarKas"></div>
+</div>
+
+</section>

@@ -24,7 +24,7 @@
 <button onclick="bukaBelanja()">🛒<br>Belanja</button>
 <button>🏭<br>Packing</button>
 <button onclick="bukaToko()">🏪<br>Toko</button>
-<button>💰<br>Kas</button>
+<button onclick="bukaKas()">💰<br>Kas</button>
 <button>📊<br>Laporan</button>
 <button onclick="bukaPengaturan()">⚙️<br>Pengaturan</button>
 </section>
@@ -66,6 +66,13 @@ async function bukaToko(){
  const data=await res.text();
  document.getElementById("konten").innerHTML=data;
  await import("./modules/toko/toko.js?v=" + Date.now());
+}
+
+async function bukaKas(){
+ const res=await fetch("modules/kas/kas.html");
+ const data=await res.text();
+ document.getElementById("konten").innerHTML=data;
+ await import("./modules/kas/kas.js?v=" + Date.now());
 }
 
 async function bukaPengaturan(){
