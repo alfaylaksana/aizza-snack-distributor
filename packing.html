@@ -1,0 +1,156 @@
+<style>
+/* Paksa semua teks di dalam card Packing jadi 12px, terlepas dari aturan luar */
+.packing-page .card,
+.packing-page .card * {
+    font-size: 12px;
+}
+
+.packing-page .card label {
+    display: block;
+    font-size: 12px;
+    margin-top: 8px;
+    margin-bottom: 2px;
+}
+.packing-page .card input,
+.packing-page .card select {
+    width: 100%;
+    padding: 6px;
+    font-size: 13px;
+    box-sizing: border-box;
+}
+.packing-page .card button {
+    margin-top: 10px;
+    width: 100%;
+}
+.packing-page #infoProduk {
+    font-size: 12px;
+    color: #777;
+    margin: 6px 0 0 0;
+}
+.packing-page #previewHasil {
+    font-size: 13px;
+    font-weight: bold;
+    color: #c96b24;
+    margin: 6px 0 0 0;
+}
+.packing-page .baris-stok {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 12px;
+}
+.packing-page .baris-stok:last-child {
+    border-bottom: none;
+}
+.packing-page .baris-stok.stok-habis b {
+    color: #b8860b;
+}
+.packing-page .baris-stok.stok-minus b {
+    color: #b03a2e;
+}
+.packing-page .bulan-group {
+    margin-bottom: 10px;
+    border: 1px solid #e5ddd2;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.packing-page .bulan-group summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 8px 10px;
+    background: #c96b24;
+    color: #fff8f0;
+    font-size: 13px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.packing-page .bulan-group summary::-webkit-details-marker {
+    display: none;
+}
+.packing-page .bulan-group summary::after {
+    content: "▸";
+    transition: transform 0.15s ease;
+}
+.packing-page .bulan-group[open] summary::after {
+    transform: rotate(90deg);
+}
+.packing-page .bulan-group .jumlah-bulan {
+    font-weight: normal;
+    font-size: 11px;
+    opacity: 0.85;
+}
+.packing-page .bulan-group .bulan-isi {
+    padding: 8px;
+    background: #faf7f2;
+}
+.packing-page .baris-transaksi {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 12px;
+}
+.packing-page .baris-transaksi:last-child {
+    border-bottom: none;
+}
+.packing-page .baris-catatan {
+    color: #777;
+}
+.packing-page .hasil-bungkus {
+    color: #1e8449;
+    font-weight: bold;
+    font-size: 13px;
+}
+</style>
+
+<section class="packing-page">
+
+<h2>📦 Packing</h2>
+
+<div class="card">
+<h3>💵 Tarif Upah Packing</h3>
+<label>Upah per Bungkus Hasil (Rp)</label>
+<input type="number" id="tarifUpahPacking" min="0" placeholder="0" onchange="simpanTarifUpah()">
+<p style="font-size:11px;color:#777;margin-top:4px;">Berlaku sama untuk semua produk. Otomatis tercatat sebagai pengeluaran Kas Usaha tiap packing disimpan.</p>
+</div>
+
+<div class="card">
+<h3>➕ Catat Packing</h3>
+
+<label>Tanggal</label>
+<input type="date" id="tanggalPacking">
+
+<label>Produk</label>
+<select id="produkPacking" onchange="tampilInfoProduk()">
+<option value="">-- pilih produk --</option>
+</select>
+
+<p id="infoProduk"></p>
+
+<label>Jumlah Bal Dipakai</label>
+<input type="number" id="balPacking" min="1" step="1" placeholder="0" oninput="hitungPreviewHasil()">
+
+<p id="previewHasil"></p>
+
+<label>Catatan (opsional)</label>
+<input type="text" id="catatanPacking" placeholder="misal: shift pagi">
+
+<button onclick="simpanPacking()">💾 Simpan Packing</button>
+</div>
+
+<div class="card">
+<h3>📊 Stok Bal per Produk (belum di-packing)</h3>
+<div id="daftarStokBal"></div>
+</div>
+
+<div class="card">
+<h3>📜 Riwayat Packing</h3>
+<div id="daftarPacking"></div>
+</div>
+
+</section>
