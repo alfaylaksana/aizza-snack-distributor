@@ -1,7 +1,7 @@
 // AIZZAY Snack Distributor
-// Service Worker Versi 0.25
+// Service Worker Versi 0.26
 
-const CACHE_NAME = "aizzay-v25";
+const CACHE_NAME = "aizzay-v26";
 
 const FILES_TO_CACHE = [
   "./",
@@ -97,6 +97,13 @@ self.addEventListener("fetch", function(event){
 
       return fetch(event.request)
         .then(function(networkResponse){
+
+          // JANGAN simpan ke cache kalau responsnya gagal (404, 500, dll)
+          // Supaya error sementara (misal GitHub Pages belum selesai update)
+          // tidak "terjebak" permanen di cache
+          if (!networkResponse.ok) {
+            return networkResponse;
+          }
 
           return caches.open(CACHE_NAME).then(function(cache){
             cache.put(event.request, networkResponse.clone());
