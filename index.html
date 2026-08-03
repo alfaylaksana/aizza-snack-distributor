@@ -32,6 +32,7 @@
 </main>
 <footer><p>AIZZAY Snack Distributor © 2026</p></footer>
 <script src="app.js"></script>
+<script src="modules/dashboard/dashboard.js"></script>
 <div id="debugBox" style="position:fixed;bottom:0;left:0;right:0;max-height:40vh;overflow:auto;background:#000;color:#0f0;font-size:11px;padding:8px;z-index:9999;display:none;"></div>
 <script>
 function tampilError(pesan){
@@ -52,6 +53,7 @@ async function bukaProduk(){
  const data=await res.text();
  document.getElementById("konten").innerHTML=data;
  await import("./modules/produk/produk.js?v=" + Date.now());
+ muatDashboard();
 }
 
 async function bukaBelanja(){
@@ -59,6 +61,7 @@ async function bukaBelanja(){
  const data=await res.text();
  document.getElementById("konten").innerHTML=data;
  await import("./modules/belanja/belanja.js?v=" + Date.now());
+ muatDashboard();
 }
 
 async function bukaToko(){
@@ -66,6 +69,7 @@ async function bukaToko(){
  const data=await res.text();
  document.getElementById("konten").innerHTML=data;
  await import("./modules/toko/toko.js?v=" + Date.now());
+ muatDashboard();
 }
 
 async function bukaLaporan(){
@@ -73,6 +77,7 @@ async function bukaLaporan(){
  const data=await res.text();
  document.getElementById("konten").innerHTML=data;
  await import("./modules/laporan/laporan.js?v=" + Date.now());
+ muatDashboard();
 }
 
 async function bukaPacking(){
@@ -80,6 +85,7 @@ async function bukaPacking(){
  const data=await res.text();
  document.getElementById("konten").innerHTML=data;
  await import("./modules/packing/packing.js?v=" + Date.now());
+ muatDashboard();
 }
 
 async function bukaKas(){
@@ -87,6 +93,7 @@ async function bukaKas(){
  const data=await res.text();
  document.getElementById("konten").innerHTML=data;
  await import("./modules/kas/kas.js?v=" + Date.now());
+ muatDashboard();
 }
 
 async function bukaPengaturan(){
@@ -94,7 +101,10 @@ async function bukaPengaturan(){
  const data=await res.text();
  document.getElementById("konten").innerHTML=data;
  await import("./modules/pengaturan/pengaturan.js?v=" + Date.now());
+ muatDashboard();
 }
+
+muatDashboard();
 </script>
 </body>
 </html>
