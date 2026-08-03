@@ -25,7 +25,7 @@
 <button onclick="bukaPacking()">🏭<br>Packing</button>
 <button onclick="bukaToko()">🏪<br>Toko</button>
 <button onclick="bukaKas()">💰<br>Kas</button>
-<button>📊<br>Laporan</button>
+<button onclick="bukaLaporan()">📊<br>Laporan</button>
 <button onclick="bukaPengaturan()">⚙️<br>Pengaturan</button>
 </section>
 <div id="konten"></div>
@@ -66,6 +66,13 @@ async function bukaToko(){
  const data=await res.text();
  document.getElementById("konten").innerHTML=data;
  await import("./modules/toko/toko.js?v=" + Date.now());
+}
+
+async function bukaLaporan(){
+ const res=await fetch("modules/laporan/laporan.html");
+ const data=await res.text();
+ document.getElementById("konten").innerHTML=data;
+ await import("./modules/laporan/laporan.js?v=" + Date.now());
 }
 
 async function bukaPacking(){

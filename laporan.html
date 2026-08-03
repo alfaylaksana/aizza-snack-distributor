@@ -1,0 +1,110 @@
+<style>
+.laporan-page .card,
+.laporan-page .card * {
+    font-size: 12px;
+}
+.laporan-page .card input,
+.laporan-page .card select {
+    width: 100%;
+    padding: 6px;
+    font-size: 13px;
+    box-sizing: border-box;
+}
+.laporan-page .card button {
+    margin-top: 10px;
+    width: 100%;
+}
+.laporan-page .ringkasan-besar {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+}
+.laporan-page .ringkasan-besar:last-child {
+    border-bottom: none;
+}
+.laporan-page .nominal-masuk {
+    color: #1e8449;
+    font-weight: bold;
+}
+.laporan-page .nominal-keluar {
+    color: #b03a2e;
+    font-weight: bold;
+}
+.laporan-page .laba {
+    color: #1e8449;
+    font-weight: bold;
+    font-size: 15px;
+}
+.laporan-page .rugi {
+    color: #b03a2e;
+    font-weight: bold;
+    font-size: 15px;
+}
+.laporan-page .sub-rincian {
+    margin: 6px 0 10px 0;
+    padding-left: 8px;
+    border-left: 2px solid #eee;
+}
+.laporan-page .baris-rincian {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0;
+    color: #555;
+}
+.laporan-page .baris-toko {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+.laporan-page .baris-toko:last-child {
+    border-bottom: none;
+}
+.laporan-page .baris-toko .nama-toko {
+    font-weight: bold;
+    font-size: 13px;
+}
+.laporan-page .baris-toko .rincian-retur {
+    color: #b03a2e;
+}
+.laporan-page table.tabel-stok {
+    width: 100%;
+    border-collapse: collapse;
+}
+.laporan-page table.tabel-stok th,
+.laporan-page table.tabel-stok td {
+    padding: 4px 3px;
+    border-bottom: 1px solid #eee;
+    text-align: right;
+}
+.laporan-page table.tabel-stok th:first-child,
+.laporan-page table.tabel-stok td:first-child {
+    text-align: left;
+}
+</style>
+
+<section class="laporan-page">
+
+<h2>📈 Laporan</h2>
+
+<div class="card">
+<h3>📅 Periode</h3>
+<input type="month" id="bulanLaporan" onchange="muatLaporan()">
+</div>
+
+<div class="card">
+<h3>💰 Laba / Rugi (Kas Usaha)</h3>
+<div id="laporanLabaRugi"></div>
+</div>
+
+<div class="card">
+<h3>🏪 Penjualan per Toko</h3>
+<div id="laporanToko"></div>
+</div>
+
+<div class="card">
+<h3>📦 Rekap Stok Saat Ini</h3>
+<p style="font-size:11px;color:#777;">Bukan per periode — kondisi stok terkini.</p>
+<div id="laporanStok"></div>
+</div>
+
+</section>

@@ -1,7 +1,7 @@
 // AIZZAY Snack Distributor
-// Service Worker Versi 0.36
+// Service Worker Versi 0.37
 
-const CACHE_NAME = "aizzay-v36";
+const CACHE_NAME = "aizzay-v37";
 
 const FILES_TO_CACHE = [
   "./",
@@ -21,7 +21,9 @@ const FILES_TO_CACHE = [
   "./modules/toko/toko.html",
   "./modules/toko/toko.js",
   "./modules/pengaturan/pengaturan.html",
-  "./modules/pengaturan/pengaturan.js"
+  "./modules/pengaturan/pengaturan.js",
+  "./modules/laporan/laporan.html",
+  "./modules/laporan/laporan.js"
 ];
 
 
